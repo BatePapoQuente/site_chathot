@@ -1,29 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { ShoppingCart, Mail, Star, Check, MessageSquare, Zap, Users, TrendingUp, X } from 'lucide-react'
+import { useState } from 'react'
+import { Mail, Star, Check, MessageSquare, Zap, Users, TrendingUp, Sparkles, DollarSign, Package } from 'lucide-react'
 
 export default function Home() {
   const [email, setEmail] = useState('')
-  const [cartCount, setCartCount] = useState(0)
-  const [showCart, setShowCart] = useState(false)
   const [emailSubmitted, setEmailSubmitted] = useState(false)
-
-  // Carregar dados do Local Storage
-  useEffect(() => {
-    const savedCart = localStorage.getItem('chathotCart')
-    if (savedCart) {
-      setCartCount(parseInt(savedCart))
-    }
-  }, [])
-
-  const handleAddToCart = () => {
-    const newCount = cartCount + 1
-    setCartCount(newCount)
-    localStorage.setItem('chathotCart', newCount.toString())
-    setShowCart(true)
-    setTimeout(() => setShowCart(false), 3000)
-  }
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,7 +27,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Header/Navbar */}
       <header className="fixed top-0 w-full bg-black/80 backdrop-blur-md z-50 border-b border-orange-500/20">
-        <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <nav className="container mx-auto px-4 py-4 flex items-center justify-center">
           <div className="flex items-center gap-3">
             <img 
               src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/ea263c57-6426-4076-b2d8-7840a5c3d022.png" 
@@ -53,59 +35,70 @@ export default function Home() {
               className="h-10 w-auto"
             />
           </div>
-          <button 
-            onClick={() => setShowCart(!showCart)}
-            className="relative p-3 hover:bg-orange-500/20 rounded-lg transition-all duration-300 border border-orange-500/30"
-          >
-            <ShoppingCart className="w-6 h-6 text-orange-500" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg shadow-orange-500/50">
-                {cartCount}
-              </span>
-            )}
-          </button>
         </nav>
       </header>
 
-      {/* Cart Notification */}
-      {showCart && (
-        <div className="fixed top-20 right-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-4 rounded-lg shadow-2xl shadow-orange-500/50 z-50 animate-bounce border border-orange-400">
-          <div className="flex items-center gap-2">
-            <Check className="w-5 h-5" />
-            <span className="font-semibold">Adicionado ao carrinho!</span>
-          </div>
+      {/* Hero Section - REDESENHADA */}
+      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+        {/* Efeitos de fundo animados */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
-      )}
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-white space-y-6">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Revolucione Seu <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">Atendimento</span> ao Cliente
-              </h1>
-              <p className="text-xl text-gray-300">
-                CRM Omnichannel completo que integra WhatsApp, Instagram, E-mail e Facebook em uma única plataforma inteligente.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={handleLoginRedirect}
-                  className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-2xl shadow-orange-500/50 hover:shadow-orange-600/60 transition-all duration-300 hover:scale-105 border border-orange-400/50"
-                >
-                  Começar Agora
-                </button>
-                <button className="border-2 border-orange-500/50 hover:border-orange-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:bg-orange-500/10 hover:scale-105">
-                  Ver Demonstração
-                </button>
-              </div>
+        <div className="container mx-auto max-w-7xl relative z-10">
+          <div className="text-center space-y-8">
+            {/* Badge de destaque */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/30 rounded-full px-6 py-3 backdrop-blur-sm">
+              <Sparkles className="w-5 h-5 text-orange-500" />
+              <span className="text-orange-400 font-semibold">CRM Omnichannel #1 do Brasil</span>
             </div>
-            <div className="relative">
-              <img 
-                src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/8fab01d6-0509-41a1-bb63-fc4f30ff355a.png" 
-                alt="ChatHot CRM Omnichannel" 
-                className="w-full rounded-2xl shadow-2xl shadow-orange-500/20 border border-orange-500/30"
-              />
+
+            {/* Título principal */}
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black leading-tight text-white">
+              Atendimento ao Cliente
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 animate-gradient">
+                Sem Limites
+              </span>
+            </h1>
+
+            {/* Subtítulo */}
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Unifique WhatsApp, Instagram, E-mail e Facebook em uma única plataforma inteligente. 
+              <span className="text-orange-400 font-semibold"> Aumente suas vendas em até 300%</span>
+            </p>
+
+            {/* CTAs principais */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+              <button 
+                onClick={handleLoginRedirect}
+                className="group relative bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl shadow-orange-500/50 hover:shadow-orange-600/70 transition-all duration-300 hover:scale-110 border-2 border-orange-400/50"
+              >
+                <span className="flex items-center gap-2">
+                  Começar Agora - Grátis
+                  <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                </span>
+              </button>
+              <button className="border-2 border-orange-500/50 hover:border-orange-500 text-white px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-orange-500/10 hover:scale-105 backdrop-blur-sm">
+                Ver Demonstração
+              </button>
+            </div>
+
+            {/* Social proof */}
+            <div className="flex flex-wrap justify-center items-center gap-8 pt-8 text-gray-400">
+              <div className="flex items-center gap-2">
+                <Users className="w-5 h-5 text-orange-500" />
+                <span className="font-semibold text-white">+10.000</span> empresas
+              </div>
+              <div className="flex items-center gap-2">
+                <Star className="w-5 h-5 text-orange-500 fill-orange-500" />
+                <span className="font-semibold text-white">4.9/5</span> avaliação
+              </div>
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-orange-500" />
+                <span className="font-semibold text-white">+5M</span> mensagens/mês
+              </div>
             </div>
           </div>
         </div>
@@ -226,48 +219,161 @@ export default function Home() {
         </div>
       </section>
 
-      {/* More Screenshots */}
+      {/* Pricing Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-white text-center mb-16">
-            Veja o ChatHot em Ação
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/d5df327d-ebac-49f4-a93d-795ac046e358.png',
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/ef023e4f-05c6-4786-ae87-045059447540.png',
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/e89b32bb-f18d-4879-a766-1ccc2d12fa04.png',
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/be48b000-ba06-4587-ac5a-e8e53a310859.png'
-            ].map((img, idx) => (
-              <img 
-                key={idx}
-                src={img} 
-                alt={`Interface ChatHot ${idx + 1}`} 
-                className="w-full rounded-xl shadow-2xl shadow-orange-500/10 border border-orange-500/30 hover:scale-105 hover:border-orange-500 transition-all duration-300"
-              />
-            ))}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/30 rounded-full px-6 py-3 backdrop-blur-sm mb-6">
+              <Package className="w-5 h-5 text-orange-500" />
+              <span className="text-orange-400 font-semibold">Planos e Preços</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Escolha o Plano <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Ideal Para Você</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Soluções flexíveis para empresas de todos os tamanhos. Comece grátis e escale conforme cresce.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Additional Features Gallery */}
-      <section className="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/d3c67b64-277c-461b-afba-af39f1fc3bc8.png',
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/344d1d5d-feda-4b38-abec-cdd94c5fb5b1.png',
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/6d99021e-b381-4344-9dea-a260a2d8c20d.png',
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/c450c065-0a53-4653-a7d3-0757ab02c937.png',
-              'https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/04a30b97-cf00-40ed-be44-e8931b390339.png'
-            ].map((img, idx) => (
-              <img 
-                key={idx}
-                src={img} 
-                alt={`Recurso ChatHot ${idx + 1}`} 
-                className="w-full rounded-xl shadow-xl shadow-orange-500/10 border border-orange-500/30 hover:scale-105 hover:border-orange-500 transition-all duration-300"
-              />
-            ))}
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Plano Starter */}
+            <div className="bg-gradient-to-br from-gray-900 to-black backdrop-blur-sm p-8 rounded-2xl border border-orange-500/30 hover:border-orange-500 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
+                <p className="text-gray-400">Ideal para começar</p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-black text-white">R$ 50</span>
+                  <span className="text-gray-400">/mês</span>
+                </div>
+              </div>
+              <ul className="space-y-4 mb-8">
+                {[
+                  '1 login',
+                  '1 fila',
+                  '1 conexão'
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-gray-300">
+                    <Check className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <button 
+                onClick={handleLoginRedirect}
+                className="w-full bg-gradient-to-r from-orange-500/20 to-orange-600/20 hover:from-orange-500 hover:to-orange-600 text-white border border-orange-500/50 hover:border-orange-500 px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105"
+              >
+                Começar Grátis
+              </button>
+            </div>
+
+            {/* Plano Prata */}
+            <div className="bg-gradient-to-br from-gray-900 to-black backdrop-blur-sm p-8 rounded-2xl border border-orange-500/30 hover:border-orange-500 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-white mb-2">Prata</h3>
+                <p className="text-gray-400">Para crescer</p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-black text-white">R$ 145</span>
+                  <span className="text-gray-400">/mês</span>
+                </div>
+              </div>
+              <ul className="space-y-4 mb-8">
+                {[
+                  '3 logins',
+                  '3 filas',
+                  '3 conexões'
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-gray-300">
+                    <Check className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <button 
+                onClick={handleLoginRedirect}
+                className="w-full bg-gradient-to-r from-orange-500/20 to-orange-600/20 hover:from-orange-500 hover:to-orange-600 text-white border border-orange-500/50 hover:border-orange-500 px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105"
+              >
+                Começar Agora
+              </button>
+            </div>
+
+            {/* Plano Ouro - DESTAQUE */}
+            <div className="bg-gradient-to-br from-orange-500/10 to-orange-600/10 backdrop-blur-sm p-8 rounded-2xl border-2 border-orange-500 relative hover:scale-105 transition-all duration-300 shadow-2xl shadow-orange-500/30">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full text-sm font-bold">
+                MAIS POPULAR
+              </div>
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-white mb-2">Ouro</h3>
+                <p className="text-gray-300">Máximo desempenho</p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-black text-white">R$ 260</span>
+                  <span className="text-gray-300">/mês</span>
+                </div>
+              </div>
+              <ul className="space-y-4 mb-8">
+                {[
+                  '5 logins',
+                  '5 filas',
+                  '5 conexões'
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-white">
+                    <Check className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <button 
+                onClick={handleLoginRedirect}
+                className="w-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white px-6 py-4 rounded-xl font-bold shadow-xl shadow-orange-500/50 transition-all duration-300 hover:scale-105"
+              >
+                Começar Agora
+              </button>
+            </div>
+
+            {/* Plano Hot */}
+            <div className="bg-gradient-to-br from-gray-900 to-black backdrop-blur-sm p-8 rounded-2xl border border-orange-500/30 hover:border-orange-500 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-white mb-2">Hot</h3>
+                <p className="text-gray-400">Ilimitado</p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-black text-white">R$ 750</span>
+                  <span className="text-gray-400">/mês</span>
+                </div>
+              </div>
+              <ul className="space-y-4 mb-8">
+                {[
+                  '10 logins',
+                  '10 filas',
+                  '10 conexões'
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-gray-300">
+                    <Check className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <button 
+                onClick={handleLoginRedirect}
+                className="w-full bg-gradient-to-r from-orange-500/20 to-orange-600/20 hover:from-orange-500 hover:to-orange-600 text-white border border-orange-500/50 hover:border-orange-500 px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105"
+              >
+                Falar com Vendas
+              </button>
+            </div>
+          </div>
+
+          {/* Garantia */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/30 rounded-full px-8 py-4 backdrop-blur-sm">
+              <DollarSign className="w-6 h-6 text-orange-500" />
+              <span className="text-white font-semibold text-lg">Garantia de 30 dias - 100% do seu dinheiro de volta</span>
+            </div>
           </div>
         </div>
       </section>
