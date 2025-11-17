@@ -37,6 +37,10 @@ export default function Home() {
     }
   }
 
+  const handleLoginRedirect = () => {
+    window.location.href = 'https://app.chathot.com.br/login'
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Header/Navbar */}
@@ -44,7 +48,7 @@ export default function Home() {
         <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
-              src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/46aae178-1014-4624-8a21-d30b3a6a04df.png" 
+              src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/ea263c57-6426-4076-b2d8-7840a5c3d022.png" 
               alt="ChatHot Logo" 
               className="h-10 w-auto"
             />
@@ -86,7 +90,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button 
-                  onClick={handleAddToCart}
+                  onClick={handleLoginRedirect}
                   className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-2xl shadow-orange-500/50 hover:shadow-orange-600/60 transition-all duration-300 hover:scale-105 border border-orange-400/50"
                 >
                   Começar Agora
@@ -279,7 +283,7 @@ export default function Home() {
               Junte-se a milhares de empresas que já revolucionaram seu relacionamento com clientes
             </p>
             <button 
-              onClick={handleAddToCart}
+              onClick={handleLoginRedirect}
               className="bg-black hover:bg-gray-900 text-orange-500 px-12 py-5 rounded-xl font-bold text-xl shadow-2xl hover:shadow-black/80 transition-all duration-300 hover:scale-110 border-2 border-orange-400"
             >
               Começar Agora - Teste Grátis
@@ -333,7 +337,7 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <img 
-              src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/46aae178-1014-4624-8a21-d30b3a6a04df.png" 
+              src="https://k6hrqrxuu8obbfwn.public.blob.vercel-storage.com/temp/ea263c57-6426-4076-b2d8-7840a5c3d022.png" 
               alt="ChatHot Logo" 
               className="h-8 w-auto"
             />
