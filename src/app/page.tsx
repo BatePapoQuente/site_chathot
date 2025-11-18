@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { Mail, Star, Check, MessageSquare, Zap, Users, TrendingUp, Sparkles, DollarSign, Package } from 'lucide-react'
+import { Mail, Star, Check, MessageSquare, Zap, Users, TrendingUp, Sparkles, DollarSign, Package, X, Play } from 'lucide-react'
 
 export default function Home() {
   const [email, setEmail] = useState('')
   const [emailSubmitted, setEmailSubmitted] = useState(false)
+  const [showVideoModal, setShowVideoModal] = useState(false)
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,6 +24,11 @@ export default function Home() {
     window.location.href = 'https://app.chathot.com.br/login'
   }
 
+  const handleWhatsAppContact = () => {
+    const message = encodeURIComponent('Ola gostaria de saber mais!!')
+    window.open(`https://wa.me/5519988111438?text=${message}`, '_blank')
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Header/Navbar */}
@@ -37,6 +43,42 @@ export default function Home() {
           </div>
         </nav>
       </header>
+
+      {/* Video Modal */}
+      {showVideoModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-in fade-in duration-300">
+          <div className="relative w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black rounded-2xl border-2 border-orange-500/50 shadow-2xl shadow-orange-500/30 overflow-hidden">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowVideoModal(false)}
+              className="absolute top-4 right-4 z-10 bg-black/80 hover:bg-orange-500 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 border border-orange-500/50"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Video Container */}
+            <div className="relative aspect-video bg-black">
+              <iframe
+                className="w-full h-full"
+                src="https://drive.google.com/file/d/1KxYxEFp6quIE99hYXi7YKARz7nIxUlMa/preview"
+                title="Demonstração ChatHot"
+                allow="autoplay"
+                allowFullScreen
+              />
+            </div>
+
+            {/* Video Info */}
+            <div className="p-6 bg-gradient-to-r from-gray-900 to-black border-t border-orange-500/30">
+              <h3 className="text-2xl font-bold text-white mb-2">
+                Veja o ChatHot em Ação
+              </h3>
+              <p className="text-gray-300">
+                Descubra como nossa plataforma pode transformar o atendimento da sua empresa
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section - REDESENHADA */}
       <section className="pt-32 pb-20 px-4 relative overflow-hidden">
@@ -80,8 +122,14 @@ export default function Home() {
                   <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 </span>
               </button>
-              <button className="border-2 border-orange-500/50 hover:border-orange-500 text-white px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-orange-500/10 hover:scale-105 backdrop-blur-sm">
-                Ver Demonstração
+              <button 
+                onClick={() => setShowVideoModal(true)}
+                className="group border-2 border-orange-500/50 hover:border-orange-500 text-white px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-orange-500/10 hover:scale-105 backdrop-blur-sm"
+              >
+                <span className="flex items-center gap-2">
+                  <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  Ver Demonstração
+                </span>
               </button>
             </div>
 
@@ -453,7 +501,12 @@ export default function Home() {
             <div className="flex gap-6">
               <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">Termos</a>
               <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">Privacidade</a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">Contato</a>
+              <button 
+                onClick={handleWhatsAppContact}
+                className="text-gray-400 hover:text-orange-500 transition-colors font-semibold"
+              >
+                Contato
+              </button>
             </div>
           </div>
         </div>
